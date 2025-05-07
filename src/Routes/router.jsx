@@ -10,6 +10,7 @@ import Register from "../Pages/Register/Register";
 import PrivateRoute from "../Provider/PrivateRoute";
 import ProfilePage from "../Pages/ProfilePage/ProfilePage";
 import BillPaymentPage from "../Pages/Bill/BillPaymentPage";
+import Loading from "./../Components/Common/Loading";
 
 const router = createBrowserRouter([
   {
@@ -30,12 +31,14 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "bills/:id",
+        path: "bills",
         element: (
           <PrivateRoute>
             <BillBoard></BillBoard>
           </PrivateRoute>
         ),
+        loader: () => fetch("../../public/JSON/bills.json"),
+        hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "bills/pay/:billId",
@@ -44,6 +47,8 @@ const router = createBrowserRouter([
             <BillPaymentPage></BillPaymentPage>
           </PrivateRoute>
         ),
+        loader: () => fetch("../../public/JSON/bills.json"),
+        hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "profile",

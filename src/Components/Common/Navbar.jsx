@@ -7,7 +7,7 @@ import userImg from "../../Assets/userTwo.png";
 import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const { user, logout, loading } = useAuth();
+  const { user, logout, loading, userBalance } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -26,7 +26,7 @@ const Navbar = () => {
         Swal.fire({
           icon: "error",
           title: "Logout Failed",
-          text: "Could not log out at this time.",
+          text: err.message || "Could not log out at this time.",
         });
       });
   };
@@ -51,9 +51,38 @@ const Navbar = () => {
 
   const links = (
     <>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/bills/:id">Bills</NavLink>
-      <NavLink to="/dashboard">DashBoard</NavLink>
+      <>
+        <li>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "text-primary font-semibold" : ""
+            }
+          >
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/bills"
+            className={({ isActive }) =>
+              isActive ? "text-primary font-semibold" : ""
+            }
+          >
+            Bills
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/dashboard"
+            className={({ isActive }) =>
+              isActive ? "text-primary font-semibold" : ""
+            }
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      </>
     </>
   );
 
@@ -82,7 +111,7 @@ const Navbar = () => {
             {/* Mobile menu items */}
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow flex flex-col gap-2 text-lg hover:bg-gray-500"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow flex flex-col gap-2 text-lg"
             >
               {links}
             </ul>
@@ -156,16 +185,65 @@ const Navbar = () => {
                 {user && (
                   <ul
                     tabIndex={0}
-                    className="menu menu-lg dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                    className="menu menu-compact dropdown-content mt-3 z-[100] p-2 shadow bg-base-200 rounded-box w-64"
                   >
-                    <li>
-                      <Link to="/profile">Profile</Link>
+                    {/* User Name */}
+                    <li className="px-4 pt-2 pb-1">
+                      <span className="font-bold text-lg block">
+                        {user.displayName || "User Name"}
+                      </span>
                     </li>
-                    <li>
-                      <Link to="/dashboard">Dashboard</Link>
+                    {/* User Email */}
+                    <li className="px-4 pb-2">
+                      <span className="text-xs text-gray-500 block">
+                        {user.email || "user@example.com"}
+                      </span>
                     </li>
+                    {/* Divider */}
                     <li>
-                      <Link to="/settings">Settings</Link>
+                      <div className="divider my-0 mx-2"></div>
+                    </li>
+                    {/* Balance */}
+                    <li className="px-4 py-1">
+                      <span className="text-sm">
+                        Balance:{" "}
+                        <span className="font-semibold">
+                          {userBalance.toLocaleString()} BDT
+                        </span>
+                      </span>
+                    </li>
+                    {/* Divider */}
+                    <li>
+                      <div className="divider my-0 mx-2"></div>
+                    </li>
+                    {/* Profile Link */}
+                    <li>
+                      <Link to="/profile" className="py-2 mx-2">
+                        Profile
+                      </Link>
+                    </li>
+                    {/* Divider */}
+                    <li>
+                      <div className="divider my-0 mx-2"></div>
+                    </li>
+                    {/* Dashboard Link */}
+                    <li>
+                      <Link to="/dashboard" className="py-2 mx-2">
+                        Dashboard
+                      </Link>
+                    </li>
+                    {/* Divider */}
+                    <li>
+                      <div className="divider my-0 mx-2"></div>
+                    </li>
+                    {/* Log Out Button */}
+                    <li>
+                      <button
+                        onClick={handleLogout}
+                        className="btn btn-sm btn-ghost text-red-500 w-full justify-start hover:bg-red-100 py-2 mx-2 text-sm"
+                      >
+                        Log Out
+                      </button>
                     </li>
                   </ul>
                 )}
