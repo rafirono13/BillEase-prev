@@ -3,7 +3,7 @@
     "id": "bill001",
     "bill_type": "electricity",
     "icon": "https://img.icons8.com/ios-filled/50/000000/lightning-bolt.png",
-    "organization_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/DESCO_Logo.svg/1200px-DESCO_Logo.svg.png",
+    "organization_logo": "https://i.ibb.co/qLQ9VLp9/desco-seeklogo.png",
     "organization": "DESCO",
     "amount": 1890,
     "due_date": "2025-05-22T06:57:58.110Z"
@@ -12,7 +12,7 @@
     "id": "bill002",
     "bill_type": "gas",
     "icon": "https://img.icons8.com/ios-filled/50/000000/gas-stove.png",
-    "organization_logo": "https://seeklogo.com/images/T/titas-gas-logo-8CA1AD1CA2-seeklogo.com.png",
+    "organization_logo": "https://i.ibb.co.com/PzQpMGh7/titash-gas-seeklogo.png",
     "organization": "Titas Gas",
     "amount": 1488,
     "due_date": "2025-05-28T06:57:58.110Z"
@@ -21,7 +21,7 @@
     "id": "bill003",
     "bill_type": "internet",
     "icon": "https://img.icons8.com/ios-filled/50/000000/wifi.png",
-    "organization_logo": "https://ispa.org.bd/wp-content/uploads/2022/08/AmberIT-LogoCMYK-e1660559026583.png",
+    "organization_logo": "https://i.ibb.co/ZzDMgT51/Amber-It.jpg",
     "organization": "Amber IT",
     "amount": 1250,
     "due_date": "2025-06-05T06:57:58.110Z"
@@ -30,7 +30,7 @@
     "id": "bill004",
     "bill_type": "credit card",
     "icon": "https://img.icons8.com/ios-filled/50/000000/bank-card-front-side.png",
-    "organization_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Standard_Chartered_logo.svg/2560px-Standard_Chartered_logo.svg.png",
+    "organization_logo": "https://i.ibb.co.com/TMWhdFRH/512px-Standard-Chartered-2021-svg.png",
     "organization": "Standard Chartered Bank",
     "amount": 7500,
     "due_date": "2025-06-10T06:57:58.110Z"
@@ -39,7 +39,7 @@
     "id": "bill005",
     "bill_type": "water",
     "icon": "https://img.icons8.com/ios-filled/50/000000/water.png",
-    "organization_logo": "https://upload.wikimedia.org/wikipedia/bn/thumb/9/9a/Dhaka_WASA_Logo.svg/1200px-Dhaka_WASA_Logo.svg.png",
+    "organization_logo": "https://i.ibb.co.com/kVQfZBzp/wasa.png",
     "organization": "Dhaka WASA",
     "amount": 650,
     "due_date": "2025-06-15T06:57:58.110Z"
