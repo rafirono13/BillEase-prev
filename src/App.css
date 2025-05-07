@@ -14,4 +14,7 @@
 
 body {
   background-color: rgba(226, 226, 226, 0.425);
+  background-image: url(Assets/coolbackgrounds-fractalize-blank.png);
+  background-repeat: no-repeat;
+  background-position:;
 }

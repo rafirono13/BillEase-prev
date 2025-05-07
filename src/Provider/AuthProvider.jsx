@@ -62,7 +62,7 @@ const AuthProvider = ({ children }) => {
     const unsub = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
-        setUserBalance(10000);
+        setUserBalance(30000);
       } else {
         setUserBalance(0);
         console.log("user logged out balance 0");
