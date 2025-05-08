@@ -11,6 +11,7 @@ import PrivateRoute from "../Provider/PrivateRoute";
 import ProfilePage from "../Pages/ProfilePage/ProfilePage";
 import BillPaymentPage from "../Pages/Bill/BillPaymentPage";
 import Loading from "./../Components/Common/Loading";
+import FadeIn from "../Components/Custom/FadeIn";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,9 @@ const router = createBrowserRouter([
         path: "bills",
         element: (
           <PrivateRoute>
-            <BillBoard></BillBoard>
+            <FadeIn direction="down" delay={0.4}>
+              <BillBoard></BillBoard>
+            </FadeIn>
           </PrivateRoute>
         ),
         loader: () => fetch("../../public/JSON/bills.json"),
@@ -44,7 +47,9 @@ const router = createBrowserRouter([
         path: "bills/pay/:billId",
         element: (
           <PrivateRoute>
-            <BillPaymentPage></BillPaymentPage>
+            <FadeIn direction="down" delay={0.4}>
+              <BillPaymentPage></BillPaymentPage>
+            </FadeIn>
           </PrivateRoute>
         ),
         loader: () => fetch("../../public/JSON/bills.json"),

@@ -20,7 +20,7 @@ const BillBoard = () => {
         {bills.map((bill) => (
           <div
             key={bill.id}
-            className="bg-white rounded-xl shadow-2xl p-6 flex items-center justify-between"
+            className="bg-white rounded-xl shadow-2xl p-3 flex items-center justify-between lg:p-6"
           >
             <div className="flex items-center space-x-4">
               <img
@@ -29,11 +29,9 @@ const BillBoard = () => {
                 className="w-10 h-10 object-contain"
               />
               <div>
-                {/* Display organization and bill type */}
                 <h2 className="text-xl font-semibold">
                   {bill.organization} - {bill.bill_type}
                 </h2>
-                {/* Format and display the due date */}
                 <p className="text-gray-600">
                   Due Date: {format(new Date(bill.due_date), "PPP")}
                 </p>

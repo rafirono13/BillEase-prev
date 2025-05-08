@@ -68,7 +68,7 @@ const BillPaymentPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10">
+    <div className="min-h-screen py-10">
       <div className="container mx-auto px-4">
         <h1 className="text-3xl font-bold text-center mb-8">Bill Payment</h1>
 
@@ -83,7 +83,7 @@ const BillPaymentPage = () => {
             {/* Card Body */}
             <div className="p-6 flex flex-col md:flex-row">
               {/* Left Side - Organization Logo */}
-              <div className="md:w-1/3 flex flex-col items-center justify-center mb-6 md:mb-0 relative">
+              <div className="md:w-1/3 flex flex-col items-center justify-center mb-6 md:mb-0 relative bg-gray-50 rounded-xl">
                 <img
                   src={selectedBill.organization_logo}
                   alt={selectedBill.organization}

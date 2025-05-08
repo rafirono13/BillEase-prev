@@ -5,7 +5,10 @@
   themes:
     light --default,
     dark --prefersdark,
-    winter;
+    winter,
+    dim,
+    business,
+    fantasy;
 }
 
 * {
@@ -13,8 +16,5 @@
 }
 
 body {
-  background-color: rgba(226, 226, 226, 0.425);
-  background-image: url(Assets/coolbackgrounds-fractalize-blank.png);
-  background-repeat: no-repeat;
-  background-position:;
+  @apply bg-gradient-to-b from-blue-200 to-white;
 }

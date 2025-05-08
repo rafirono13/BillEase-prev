@@ -91,7 +91,6 @@ const Navbar = () => {
       <div className="navbar shadow-sm lg:px-30">
         <div className="navbar-start">
           <div className="dropdown">
-            {/* Mobile menu button */}
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +118,7 @@ const Navbar = () => {
           {/* Brand Logo */}
           <div>
             <Link to="/">
-              <a className="btn btn-ghost text-2xl font-bold flex items-center gap-2">
+              <a className="btn bg-transparent border-none text-2xl font-bold flex items-center gap-2">
                 <FaFireAlt className="text-red-500 text-2xl animate-pulse" />
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                   BillEase
@@ -130,13 +129,13 @@ const Navbar = () => {
         </div>
 
         {/* Desktop menu items */}
-        <div className="navbar-center hidden lg:flex">
+        <div className="navbar-center hidden lg:flex lg:ml-10">
           <ul className="menu menu-horizontal px-1 flex gap-10 text-lg">
             {links}
           </ul>
         </div>
 
-        {/* Dynamic Part (Login/Logout/Profile) - Render based on loading state */}
+        {/* Dynamic Part (Login/Logout/Pfp)Render based on loading state */}
         <div className="navbar-end">
           {loading ? (
             <div className="pr-2 flex items-center">
@@ -149,13 +148,13 @@ const Navbar = () => {
                 {user ? (
                   <button
                     onClick={handleLogout}
-                    className="btn text-lg hover:bg-white border-0"
+                    className="btn text-lg bg-transparent"
                   >
                     LogOut
                   </button>
                 ) : (
                   <Link to="/auth/login">
-                    <a className="btn text-lg hover:bg-white border-0">Login</a>
+                    <a className="btn text-lg bg-transparent">Login</a>
                   </Link>
                 )}
               </div>

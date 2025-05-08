@@ -5,25 +5,29 @@ const facts = [
     title: "Secure & Encrypted Payments",
     desc: "Your data and transactions are protected with top-grade encryption. No compromises, ever.",
     icon: <FaShieldAlt size={48} className="text-gray-400" />,
-    gradient: "from-cyan-600 to-blue-600",
+    // Gradient from deep blue (top) to light blue (bottom) for the first card
+    gradient: "bg-gradient-to-b from-blue-700 to-blue-300",
   },
   {
     title: "Real-Time Bill Syncing",
     desc: "We keep your bills updated in real-time with direct integrations from trusted providers.",
     icon: <FaClock size={48} className="text-gray-400" />,
-    gradient: "from-indigo-500 to-purple-600",
+    // Gradient from slightly lighter blue (top) to light blue (bottom) for the second card
+    gradient: "bg-gradient-to-b from-blue-600 to-blue-300",
   },
   {
     title: "All-in-One Dashboard",
     desc: "Electricity, Gas, Water, Internet — manage everything from one beautiful interface.",
     icon: <FaBolt size={48} className="text-gray-400" />,
-    gradient: "from-amber-600 to-pink-500",
+    // Gradient from even lighter blue (top) to light blue (bottom) for the third card
+    gradient: "bg-gradient-to-b from-blue-500 to-blue-300",
   },
   {
     title: "Designed for Peace of Mind",
     desc: "No stress, no mess. Our app feels like a calm winter breeze — organized, clean, and cozy.",
     icon: <FaSmileBeam size={48} className="text-gray-400" />,
-    gradient: "from-teal-600 to-green-500",
+    // Gradient from lightest blue (top) to light blue (bottom) for the fourth card
+    gradient: "bg-gradient-to-b from-blue-400 to-blue-300",
   },
 ];
 

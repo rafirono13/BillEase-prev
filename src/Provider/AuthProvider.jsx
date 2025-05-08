@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -16,6 +17,13 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [userBalance, setUserBalance] = useState(0);
   console.log("data", user, loading);
+
+  // Update userBalance in localStorage
+  useEffect(() => {
+    if (user && userBalance !== undefined) {
+      localStorage.setItem(`balance_${user.uid}`, userBalance.toString());
+    }
+  }, [userBalance, user]);
 
   //! Register
   const register = (email, password) => {
@@ -46,6 +54,12 @@ const AuthProvider = ({ children }) => {
     return signOut(auth).finally(() => setLoading(false));
   };
 
+  //! Password Reset
+  const resetPassword = (email) => {
+    setLoading(true);
+    return sendPasswordResetEmail(auth, email).finally(() => setLoading(false));
+  };
+
   //! UpdateData
   const updateUser = (updatedData) => {
     if (auth.currentUser) {
@@ -62,7 +76,16 @@ const AuthProvider = ({ children }) => {
     const unsub = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
-        setUserBalance(30000);
+        // Check if user has a stored balance
+        const storedBalance = localStorage.getItem(
+          `balance_${currentUser.uid}`
+        );
+        if (storedBalance) {
+          setUserBalance(parseInt(storedBalance, 10));
+        } else {
+          setUserBalance(10000);
+          localStorage.setItem(`balance_${currentUser.uid}`, "10000");
+        }
       } else {
         setUserBalance(0);
         console.log("user logged out balance 0");
@@ -83,6 +106,7 @@ const AuthProvider = ({ children }) => {
     updateUser,
     userBalance,
     setUserBalance,
+    resetPassword,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

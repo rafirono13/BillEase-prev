@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "./../../Hooks/useAuth";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const { login, setUser, googleLogin } = useAuth();
+  const { login, setUser, googleLogin, resetPassword } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location.pathname);
+
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const HandleLoginSubmit = (e) => {
     e.preventDefault();
@@ -62,8 +64,74 @@ const Login = () => {
       });
   };
 
+  const handleForgotPassword = (e) => {
+    e.preventDefault();
+    if (!forgotPasswordEmail) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Please enter your email address",
+      });
+      return;
+    }
+
+    resetPassword(forgotPasswordEmail)
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Email Sent",
+          text: "Password reset email has been sent to your inbox",
+          timer: 3000,
+        });
+        setIsModalOpen(false);
+        setForgotPasswordEmail("");
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: err.message,
+        });
+      });
+  };
+
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div className="hero min-h-screen">
+      {/* Modal */}
+      {isModalOpen && (
+        <dialog id="forgot_password_modal" className="modal" open>
+          <div className="modal-box">
+            <h3 className="font-bold text-lg">Reset Password</h3>
+            <p className="py-4">
+              Enter your email address to receive a password reset link.
+            </p>
+            <input
+              type="email"
+              placeholder="Email"
+              className="input input-bordered w-full mt-2"
+              value={forgotPasswordEmail}
+              onChange={(e) => setForgotPasswordEmail(e.target.value)}
+            />
+            <div className="modal-action">
+              <button
+                className="btn btn-neutral"
+                onClick={handleForgotPassword}
+              >
+                Send Reset Link
+              </button>
+              <button
+                className="btn btn-outline"
+                onClick={() => setIsModalOpen(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </dialog>
+      )}
+
+      {/* Modal */}
+
       <div className="hero-content flex-col lg:flex-row-reverse">
         {/* Left Side Text */}
         <div className="text-center lg:text-left">
@@ -98,7 +166,12 @@ const Login = () => {
                 />
 
                 <div className="flex justify-end text-sm mt-1 mb-2">
-                  <a className="link link-hover">Forgot password?</a>
+                  <a
+                    className="link link-hover"
+                    onClick={() => setIsModalOpen(true)}
+                  >
+                    Forgot password?
+                  </a>
                 </div>
 
                 <button className="btn btn-neutral mt-2">Login</button>
