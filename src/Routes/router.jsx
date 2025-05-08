@@ -27,7 +27,9 @@ const router = createBrowserRouter([
         path: "dashboard",
         element: (
           <PrivateRoute>
-            <DashBoard></DashBoard>
+            <FadeIn direction="down" delay={0.4}>
+              <DashBoard></DashBoard>
+            </FadeIn>
           </PrivateRoute>
         ),
       },

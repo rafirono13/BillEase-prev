@@ -9,7 +9,8 @@ const BillPaymentPage = () => {
   const bills = useLoaderData();
   console.log(bills);
   const [selectedBill, setSelectedBill] = useState(null);
-  const { user, userBalance, setUserBalance } = useAuth();
+  const { user, userBalance, setUserBalance, paidBills, markBillAsPaid } =
+    useAuth();
   const navigate = useNavigate();
 
   // finding the selected bill from the bills data
@@ -18,8 +19,22 @@ const BillPaymentPage = () => {
     setSelectedBill(bill);
   }, [bills, billId]);
 
+  const isPaid = paidBills.includes(billId);
+
+  useEffect(() => {
+    if (isPaid) {
+      Swal.fire({
+        icon: "info",
+        title: "Already Paid",
+        text: "This bill has already been paid!",
+        confirmButtonColor: "#3085d6",
+      });
+    }
+  }, [isPaid]);
+
   // bill handle
   const handlePay = () => {
+    if (isPaid) return;
     if (userBalance < setSelectedBill.amount) {
       Swal.fire({
         icon: "error",
@@ -43,6 +58,7 @@ const BillPaymentPage = () => {
         // Update balance
         const newBalance = userBalance - selectedBill.amount;
         setUserBalance(newBalance);
+        markBillAsPaid(billId);
 
         // Show success message
         Swal.fire({
@@ -142,9 +158,9 @@ const BillPaymentPage = () => {
                     <button
                       onClick={handlePay}
                       className="btn btn-primary w-full"
-                      disabled={userBalance < selectedBill.amount}
+                      disabled={userBalance < selectedBill.amount || isPaid}
                     >
-                      Pay Bill
+                      {isPaid ? "Already Paid" : "Pay Bill"}
                     </button>
 
                     {/* Insufficient Balance Warning */}

@@ -16,7 +16,28 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userBalance, setUserBalance] = useState(0);
+  const [paidBills, setPaidBills] = useState([]);
   console.log("data", user, loading);
+
+  useEffect(() => {
+    if (user) {
+      const storedPaidBills = localStorage.getItem(`paidBills_${user.uid}`);
+      setPaidBills(storedPaidBills ? JSON.parse(storedPaidBills) : []);
+    }
+  }, [user]);
+
+  const markBillAsPaid = (billId) => {
+    setPaidBills((prev) => {
+      const newPaidBills = [...prev, billId];
+      if (user) {
+        localStorage.setItem(
+          `paidBills_${user.uid}`,
+          JSON.stringify(newPaidBills)
+        );
+      }
+      return newPaidBills;
+    });
+  };
 
   // Update userBalance in localStorage
   useEffect(() => {
@@ -107,6 +128,8 @@ const AuthProvider = ({ children }) => {
     userBalance,
     setUserBalance,
     resetPassword,
+    paidBills,
+    markBillAsPaid,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
