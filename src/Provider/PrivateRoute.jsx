@@ -8,7 +8,6 @@ const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
 
   const location = useLocation();
-  console.log("Current location on the user", location);
 
   if (loading) {
     return <Loading></Loading>;

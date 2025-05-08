@@ -17,21 +17,44 @@ const Login = () => {
     const form = e.target;
     const password = form.password.value;
     const email = form.email.value;
-    console.log({ email, password });
 
     login(email, password)
       .then((res) => {
         setUser(res.user);
-        console.log(res.user);
         const from = location.state?.from?.pathname || "/";
         navigate(from, { replace: true });
       })
       .catch((err) => {
         console.error("Login Error:", err);
+        let errorMessage = "An unexpected error occurred during login.";
+
+        switch (err.code) {
+          case "auth/user-not-found":
+            errorMessage =
+              "No account found with this email. Please register or check the email address.";
+            break;
+          case "auth/wrong-password":
+            errorMessage =
+              "Incorrect password. Please check your password and try again.";
+            break;
+          case "auth/invalid-email":
+            errorMessage =
+              "The email address is not valid. Please enter a valid email address.";
+            break;
+          case "auth/user-disabled":
+            errorMessage =
+              "This account has been disabled. Please contact support.";
+            break;
+
+          default:
+            errorMessage = err.message || errorMessage;
+            break;
+        }
+
         Swal.fire({
           icon: "error",
           title: "Login Failed",
-          text: err.message || "An error occurred during login.",
+          text: errorMessage,
         });
       });
   };
@@ -45,7 +68,6 @@ const Login = () => {
     googleLogin()
       .then((res) => {
         setUser(res.user);
-        console.log("Google signed in user:", res.user);
 
         const savedPath = sessionStorage.getItem("redirectAfterLogin");
         sessionStorage.removeItem("redirectAfterLogin");

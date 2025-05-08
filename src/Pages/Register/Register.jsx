@@ -8,7 +8,6 @@ const Register = () => {
   const { register, setUser, updateUser, googleLogin } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  console.log("Register page location state:", location.state);
 
   const HandleRegSubmit = (e) => {
     e.preventDefault();
@@ -18,18 +17,14 @@ const Register = () => {
     const password = form.password.value;
     const email = form.email.value;
 
-    console.log({ email, password, name, photo });
-
     //User Creation and update
 
     register(email, password)
       .then((res) => {
         const user = res.user;
-        console.log(user);
         updateUser({ displayName: name, photoURL: photo })
           .then(() => {
             setUser({ ...user, displayName: name, photoURL: photo });
-            console.log("User profile updated");
           })
           .catch((err) => {
             console.error("Profile Update Error:", err);
@@ -59,7 +54,6 @@ const Register = () => {
     googleLogin()
       .then((res) => {
         setUser(res.user);
-        console.log("Google signed in user:", res.user);
 
         const from = location.state?.form?.pathname || "/";
         navigate(from, { replace: true });

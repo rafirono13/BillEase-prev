@@ -4,28 +4,26 @@ const OrganizationShowcase = () => {
   const [organizations, setOrganizations] = useState([]);
 
   useEffect(() => {
-    // Fetch data from bills.json
-    fetch("/JSON/bills.json") // Assuming bills.json is in the public/JSON folder
-      .then((response) => response.json())
+    fetch("/JSON/bills.json")
+      .then((res) => res.json())
       .then((data) => {
-        // Extract unique organizations
-        const uniqueOrganizations = Array.from(
+        const unique = Array.from(
           new Set(
-            data.map((bill) =>
+            data.map((item) =>
               JSON.stringify({
-                name: bill.organization,
-                logo: bill.organization_logo,
+                name: item.organization,
+                logo: item.organization_logo,
               })
             )
           )
-        ).map((orgString) => JSON.parse(orgString));
-        setOrganizations(uniqueOrganizations);
+        ).map((str) => JSON.parse(str));
+        setOrganizations(unique);
       })
-      .catch((error) => console.error("Error fetching organizations:", error));
+      .catch((err) => console.error("Fetch error:", err));
   }, []);
 
   return (
-    <section className="my-10 w-full">
+    <section className="my-12 w-full">
       <div className="text-center mb-10">
         <h2 className="text-3xl font-bold text-primary">Our Partners</h2>
         <p className="text-sm text-gray-500">
@@ -33,18 +31,20 @@ const OrganizationShowcase = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {organizations.map((org, index) => (
+      <div className="flex flex-wrap justify-center gap-6">
+        {organizations.map((org, i) => (
           <div
-            key={index}
-            className="bg-white rounded-xl shadow-xl p-4 flex flex-col items-center justify-center transition-all duration-300 hover:scale-[1.02]"
+            key={i}
+            className="bg-white w-40 sm:w-48 lg:w-56 p-4 rounded-2xl shadow-md hover:shadow-lg transition-all flex flex-col items-center"
           >
             <img
               src={org.logo}
               alt={org.name}
-              className="w-20 h-20 object-contain mb-4"
+              className="w-16 h-16 sm:w-20 sm:h-20 object-contain mb-3"
             />
-            <p className="text-lg font-semibold text-center">{org.name}</p>
+            <p className="text-center text-sm sm:text-base font-semibold text-gray-700">
+              {org.name}
+            </p>
           </div>
         ))}
       </div>

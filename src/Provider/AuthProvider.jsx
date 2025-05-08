@@ -17,7 +17,6 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [userBalance, setUserBalance] = useState(0);
   const [paidBills, setPaidBills] = useState([]);
-  console.log("data", user, loading);
 
   useEffect(() => {
     if (user) {
@@ -86,7 +85,6 @@ const AuthProvider = ({ children }) => {
     if (auth.currentUser) {
       return updateProfile(auth.currentUser, updatedData).then(() => {
         setUser((prevUser) => ({ ...prevUser, ...updatedData }));
-        console.log("User profile updated in AuthProvider.");
       });
     }
     return Promise.reject(new Error("No user to update."));

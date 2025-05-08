@@ -26,31 +26,28 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="my-10 w-full">
+    <section className="my-12 w-full">
       <div className="text-center mb-10">
-        <h2 className="text-3xl font-bold text-primary flex justify-center items-center gap-2">
-          <FaQuestionCircle className="text-accent sm:hidden" />
-          Frequently Asked Questions
+        <h2 className="text-3xl font-bold text-primary flex items-center justify-center gap-2">
+          <FaQuestionCircle className="" />
+          FAQ
         </h2>
         <p className="text-sm text-gray-500">
-          Everything you need to know about using our bill payment platform.
+          Everything you need to know about our bill payment system.
         </p>
       </div>
 
       <div className="max-w-4xl mx-auto space-y-4">
-        {faqs.map((faq, index) => (
-          <div
-            key={index}
-            className="collapse collapse-arrow bg-base-200 shadow-xl rounded-xl transition-all duration-300 hover:scale-[1.01]"
+        {faqs.map((faq, idx) => (
+          <details
+            key={idx}
+            className="bg-base-200 rounded-xl shadow-md p-4 group open:shadow-lg transition-all"
           >
-            <input type="checkbox" className="peer" />
-            <div className="collapse-title text-lg font-medium peer-checked:bg-primary peer-checked:text-white">
+            <summary className="cursor-pointer text-lg font-medium group-open:text-white group-open:bg-primary px-2 py-1 rounded-md transition-colors">
               {faq.question}
-            </div>
-            <div className="collapse-content bg-base-100 text-gray-600 px-4 py-2 rounded-b-xl">
-              <p>{faq.answer}</p>
-            </div>
-          </div>
+            </summary>
+            <p className="mt-2 text-gray-600 px-2">{faq.answer}</p>
+          </details>
         ))}
       </div>
     </section>
