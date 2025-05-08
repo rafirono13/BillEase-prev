@@ -45,7 +45,7 @@ const ProvidersSection = () => {
               key={idx}
               className="bg-base-200 rounded-2xl shadow-2xl p-6 flex flex-col items-center text-center hover:shadow-xl transition duration-300"
             >
-              <div className="text-accent mb-4">{provider.icon}</div>
+              <div className="mb-4">{provider.icon}</div>
               <h3 className="font-semibold text-lg mb-1">{provider.name}</h3>
               <p className="text-sm text-base-content/70">{provider.desc}</p>
             </div>

@@ -21,16 +21,16 @@ const BillPaymentPage = () => {
 
   const isPaid = paidBills.includes(billId);
 
-  useEffect(() => {
-    if (isPaid) {
-      Swal.fire({
-        icon: "info",
-        title: "Already Paid",
-        text: "This bill has already been paid!",
-        confirmButtonColor: "#3085d6",
-      });
-    }
-  }, [isPaid]);
+  // useEffect(() => {
+  //   if (isPaid) {
+  //     Swal.fire({
+  //       icon: "info",
+  //       title: "Already Paid",
+  //       text: "This bill has already been paid!",
+  //       confirmButtonColor: "#3085d6",
+  //     });
+  //   }
+  // }, [isPaid]);
 
   // bill handle
   const handlePay = () => {

@@ -2,12 +2,14 @@ import { useLoaderData, useNavigate } from "react-router";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
+import { FaCheckCircle } from "react-icons/fa";
 
 const BillBoard = () => {
   const bills = useLoaderData();
   const navigate = useNavigate();
   const [filteredBills, setFilteredBills] = useState(bills);
   const [selectType, setSelectedType] = useState("all");
+  const { paidBills } = useAuth();
 
   const billTypes = ["all", ...new Set(bills.map((bill) => bill.bill_type))];
 
@@ -71,37 +73,44 @@ const BillBoard = () => {
       {/* Bill Cards */}
       <div className="grid grid-cols-1 gap-6">
         {filteredBills.length > 0 ? (
-          filteredBills.map((bill) => (
-            <div
-              key={bill.id}
-              className="bg-white rounded-xl shadow-2xl p-3 flex items-center justify-between lg:p-6 transition-all hover:shadow-xl"
-            >
-              <div className="flex items-center space-x-4">
-                <img
-                  src={bill.icon}
-                  alt={bill.bill_type}
-                  className="w-10 h-10 object-contain"
-                />
-                <div>
-                  <h2 className="text-xl font-semibold">
-                    {bill.organization} - {bill.bill_type}
-                  </h2>
-                  <p className="text-gray-600">
-                    Due Date: {format(new Date(bill.due_date), "PPP")}
-                  </p>
-                  <p className="text-gray-800 font-bold">
-                    {bill.amount.toLocaleString()} BDT
-                  </p>
-                </div>
-              </div>
-              <button
-                onClick={() => handlePayClick(bill.id)}
-                className="btn btn-primary"
+          filteredBills.map((bill) => {
+            const isPaid = paidBills.includes(bill.id);
+            return (
+              <div
+                key={bill.id}
+                className="bg-white rounded-xl shadow-2xl p-3 flex items-center justify-between lg:p-6 transition-all hover:shadow-xl"
               >
-                Pay
-              </button>
-            </div>
-          ))
+                <div className="flex items-center space-x-4">
+                  <img
+                    src={bill.icon}
+                    alt={bill.bill_type}
+                    className="w-10 h-10 object-contain"
+                  />
+                  <div>
+                    <h2 className="text-xl font-semibold">
+                      {bill.organization} - {bill.bill_type}
+                    </h2>
+                    <p className="text-gray-600">
+                      Due Date: {format(new Date(bill.due_date), "PPP")}
+                    </p>
+                    <p className="text-gray-800 font-bold">
+                      {bill.amount.toLocaleString()} BDT
+                    </p>
+                  </div>
+                </div>
+                {isPaid ? (
+                  <FaCheckCircle className="text-green-500 text-3xl" />
+                ) : (
+                  <button
+                    onClick={() => handlePayClick(bill.id)}
+                    className="btn btn-primary"
+                  >
+                    Pay
+                  </button>
+                )}
+              </div>
+            );
+          })
         ) : (
           <div className="text-center py-8">
             <p className="text-lg text-gray-500">

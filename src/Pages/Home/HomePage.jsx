@@ -7,6 +7,7 @@ import FAQSection from "../../Components/Custom/FAQSection";
 import { motion } from "framer-motion";
 import FadeIn from "../../Components/Custom/FadeIn";
 import Timeline from "../../Components/Custom/Timeline";
+import OrganizationShowcase from "../../Components/Custom/OrganizationShowcase";
 
 const HomePage = () => {
   return (
@@ -44,6 +45,12 @@ const HomePage = () => {
       <section>
         <FadeIn direction="up" delay={0.7}>
           <FAQSection />
+        </FadeIn>
+      </section>
+
+      <section>
+        <FadeIn direction="right" delay={0.3}>
+          <OrganizationShowcase />
         </FadeIn>
       </section>
     </div>

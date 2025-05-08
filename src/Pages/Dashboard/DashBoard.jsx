@@ -14,9 +14,15 @@ import {
 } from "recharts";
 import useAuth from "../../Hooks/useAuth";
 import { format } from "date-fns";
-import { FaMoneyBillWave, FaCalendarAlt } from "react-icons/fa";
+import {
+  FaMoneyBillWave,
+  FaCalendarAlt,
+  FaLayerGroup,
+  FaFileInvoiceDollar,
+} from "react-icons/fa";
 import { MdOutlinePending, MdPaid } from "react-icons/md";
 import { RiWaterFlashFill } from "react-icons/ri";
+import { Link } from "react-router";
 
 const DashBoard = () => {
   const { user, userBalance } = useAuth();
@@ -64,7 +70,9 @@ const DashBoard = () => {
     return acc;
   }, {});
 
-  // Prepare chart data
+  const numberOfBillTypes = Object.keys(billsByType).length;
+
+  // chasrt data
   const pieChartData = [
     { name: "Available Balance", value: userBalance },
     { name: "Bills Due", value: totalBillAmount },
@@ -93,10 +101,10 @@ const DashBoard = () => {
       color: "bg-orange-100 border-orange-300",
     },
     {
-      title: "Remaining After Payment",
-      value: `${Math.max(0, userBalance - totalBillAmount).toLocaleString()} BDT`,
-      icon: <MdPaid className="text-blue-500 text-3xl" />,
-      color: "bg-blue-100 border-blue-300",
+      title: "Bill Categories",
+      value: `${numberOfBillTypes} Types`,
+      icon: <FaLayerGroup className="text-teal-500 text-3xl" />,
+      color: "bg-teal-100 border-teal-300",
     },
     {
       title: "Next Due Bill",
@@ -121,6 +129,12 @@ const DashBoard = () => {
       <h1 className="text-3xl font-bold mb-8 text-center">
         Financial Dashboard
       </h1>
+      <Link to="/bills">
+        <button className="btn btn-primary btn-md shadow-lg hover:shadow-xl transition-shadow duration-300 my-2">
+          View All Bills
+          <FaFileInvoiceDollar className="ml-4" />
+        </button>
+      </Link>
 
       {/* Stat Boxes */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

@@ -12,6 +12,7 @@ import ProfilePage from "../Pages/ProfilePage/ProfilePage";
 import BillPaymentPage from "../Pages/Bill/BillPaymentPage";
 import Loading from "./../Components/Common/Loading";
 import FadeIn from "../Components/Custom/FadeIn";
+import AboutPage from "../Components/Custom/About";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage></HomePage>,
+      },
+      {
+        path: "about",
+        element: (
+          <FadeIn direction="down" delay={0.4}>
+            <AboutPage />
+          </FadeIn>
+        ),
       },
       {
         path: "dashboard",
