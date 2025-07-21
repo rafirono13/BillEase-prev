@@ -25,14 +25,14 @@ import { RiWaterFlashFill } from "react-icons/ri";
 import { Link } from "react-router";
 
 const DashBoard = () => {
-  const { user, userBalance } = useAuth();
+  const { userBalance } = useAuth();
   const [bills, setBills] = useState([]);
   const [loading, setLoading] = useState(true);
   const [chartType, setChartType] = useState("pie");
 
   // Fetch bills data
   useEffect(() => {
-    fetch("../../public/JSON/bills.json")
+    fetch("/JSON/bills.json")
       .then((res) => res.json())
       .then((data) => {
         setBills(data);

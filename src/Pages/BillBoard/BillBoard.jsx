@@ -31,7 +31,7 @@ const BillBoard = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8c min-h-screen my-10">
       {/* Mother div */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
         <h1 className="text-3xl font-bold mb-4 md:mb-0">Bills</h1>

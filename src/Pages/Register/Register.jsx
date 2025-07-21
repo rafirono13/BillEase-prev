@@ -60,21 +60,23 @@ const Register = () => {
       })
       .catch((err) => {
         console.error("Google Sign-in Error:", err);
-        sessionStorage.removeItem("redirectAfterLogin");
-
-        let errorMessage = "An error occurred during Google sign-in.";
+        console.error("Registration Error:", err);
+        let errorMessage = "An unexpected error occurred during registration.";
 
         switch (err.code) {
-          case "auth/popup-closed-by-user":
-            errorMessage = "Google Sign-in was cancelled.";
-            break;
-          case "auth/cancelled-popup-request":
+          case "auth/email-already-in-use":
             errorMessage =
-              "You have an ongoing sign-in request. Please try again in a moment.";
+              "This email address is already registered. Please try logging in or use a different email.";
             break;
-          case "auth/operation-not-allowed":
-            errorMessage = "Google Sign-in is not enabled for this project.";
+          case "auth/invalid-email":
+            errorMessage =
+              "The email address is not valid. Please enter a valid email address.";
             break;
+          case "auth/weak-password":
+            errorMessage =
+              "The password is too weak. Please choose a stronger password (at least 6 characters).";
+            break;
+
           default:
             errorMessage = err.message || errorMessage;
             break;
@@ -82,14 +84,14 @@ const Register = () => {
 
         Swal.fire({
           icon: "error",
-          title: "Sign-in Failed",
+          title: "Registration Failed",
           text: errorMessage,
         });
       });
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div className="hero min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
         {/* Left Text */}
         <div className="text-center lg:text-left">

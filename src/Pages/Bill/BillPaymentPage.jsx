@@ -9,8 +9,7 @@ const BillPaymentPage = () => {
   const bills = useLoaderData();
   console.log(bills);
   const [selectedBill, setSelectedBill] = useState(null);
-  const { user, userBalance, setUserBalance, paidBills, markBillAsPaid } =
-    useAuth();
+  const { userBalance, setUserBalance, paidBills, markBillAsPaid } = useAuth();
   const navigate = useNavigate();
 
   // finding the selected bill from the bills data

@@ -51,7 +51,7 @@ const router = createBrowserRouter([
             </FadeIn>
           </PrivateRoute>
         ),
-        loader: () => fetch("../../public/JSON/bills.json"),
+        loader: () => fetch("/JSON/bills.json"),
         hydrateFallbackElement: <Loading></Loading>,
       },
       {
@@ -63,7 +63,7 @@ const router = createBrowserRouter([
             </FadeIn>
           </PrivateRoute>
         ),
-        loader: () => fetch("../../public/JSON/bills.json"),
+        loader: () => fetch("/JSON/bills.json"),
         hydrateFallbackElement: <Loading></Loading>,
       },
       {

@@ -77,11 +77,32 @@ const Login = () => {
       })
       .catch((err) => {
         console.error("Google Sign-in Error:", err);
+        console.error("Google Sign-in Error:", err);
         sessionStorage.removeItem("redirectAfterLogin");
+
+        let errorMessage = "An error occurred during Google sign-in.";
+
+        switch (err.code) {
+          case "auth/popup-closed-by-user":
+            errorMessage = "Google Sign-in was cancelled.";
+            break;
+          case "auth/cancelled-popup-request":
+            errorMessage =
+              "You have an ongoing sign-in request. Please try again in a moment.";
+            break;
+          case "auth/operation-not-allowed":
+            errorMessage = "Google Sign-in is not enabled for this project.";
+            break;
+
+          default:
+            errorMessage = err.message || errorMessage;
+            break;
+        }
+
         Swal.fire({
           icon: "error",
           title: "Sign-in Failed",
-          text: err.message || "An error occurred during Google sign-in.",
+          text: errorMessage,
         });
       });
   };
